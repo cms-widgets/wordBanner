@@ -16,6 +16,7 @@ import me.jiangcai.lib.resource.service.ResourceService;
 import org.apache.http.entity.ContentType;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -25,11 +26,14 @@ import java.util.Map;
  * @author CJ
  */
 public class WidgetInfo implements Widget{
-    private static final String VALID_TEXT_COLOR = "textColor";//文本颜色
-    private static final String VALID_BG_COLOR = "textBgColor";//背景颜色
-    private static final String VALID_FONT_SIZE = "textFontSize";//字体大小
-    private static final String VALID_CONTENT = "textContent";//文字内容
-    private static final String VALID_BOLD = "textBold";//是否粗体
+    public static final String VALID_TEXT_COLOR = "textColor";//文本颜色
+    public static final String VALID_BG_COLOR = "textBgColor";//背景颜色
+    public static final String VALID_FONT_SIZE = "textFontSize";//字体大小
+    public static final String VALID_TITLE = "textTitle";//文字标题
+    public static final String VALID_SUB_TITLE = "textSubTitle";//文字副标题
+    public static final String VALID_BOLD = "textBold";//是否粗体
+    public static final String VALID_LINK_URL = "linkUrl";//是否粗体
+    public static final String VALID_BG_IMG = "bgImg";//是否粗体
 
     @Override
     public String groupId() {
@@ -72,20 +76,19 @@ public class WidgetInfo implements Widget{
         Map<String, Resource> map = new HashMap<>();
         map.put("thumbnail/wordBannerStyle1Style.png", new ClassPathResource("thumbnail/wordBannerStyle1Style.png"
                 , getClass().getClassLoader()));
+        map.put("js/wordBanner.js", new ClassPathResource("js/wordBanner.js"  , getClass().getClassLoader()));
         return map;
     }
 
     @Override
-    public Resource widgetDependencyContent(ContentType contentType) {
-        if (contentType.getMimeType().equalsIgnoreCase("text/css")){
+    public Resource widgetDependencyContent(MediaType mediaType) {
+        if (mediaType.isCompatibleWith(CSS)){
             return  new ClassPathResource("css/wordBanner.css",getClass().getClassLoader());
         }
+        if (mediaType.isCompatibleWith(Javascript)){
+            return  new ClassPathResource("js/wordBanner.js",getClass().getClassLoader());
+        }
         return null;
-    }
-
-    @Override
-    public Resource widgetJs() {
-        return new ClassPathResource("js/wordBanner.js", getClass().getClassLoader());
     }
 
     @Override
@@ -108,13 +111,17 @@ public class WidgetInfo implements Widget{
         if (!flag) {
             throw new IllegalArgumentException("样式不存在");
         }
-        String content = (String) componentProperties.get(VALID_CONTENT);
+        String textTitle = (String) componentProperties.get(VALID_TITLE);
+        String textSubTitle = (String) componentProperties.get(VALID_SUB_TITLE);
         String textColor = (String) componentProperties.get(VALID_TEXT_COLOR);
         String bgColor = (String) componentProperties.get(VALID_BG_COLOR);
         String fontSize = (String) componentProperties.get(VALID_FONT_SIZE);
         String bold = (String) componentProperties.get(VALID_BOLD);
-        if (content == null || textColor == null || bgColor == null || fontSize == null || bold == null
-                || content.equals("") || textColor.equals("") || bgColor.equals("") || fontSize.equals("")) {
+        String linkUrl = (String) componentProperties.get(VALID_LINK_URL);
+        String bgImg = (String) componentProperties.get(VALID_BG_IMG);
+        if (textTitle == null || textSubTitle==null|| textColor == null || bgColor == null || fontSize == null || bold == null
+              ||linkUrl==null || bgImg==null  || textTitle.equals("") || textColor.equals("") || bgColor.equals("")
+                || fontSize.equals("")   ) {
             throw new IllegalArgumentException("控件属性缺少");
         }
     }
@@ -130,8 +137,11 @@ public class WidgetInfo implements Widget{
         properties.put(VALID_TEXT_COLOR,"#000000");
         properties.put(VALID_BG_COLOR,"#ffffff");
         properties.put(VALID_FONT_SIZE,"16px");
-        properties.put(VALID_CONTENT,description(Locale.CHINESE));
-        properties.put(VALID_BOLD,true);
+        properties.put(VALID_TITLE,description(Locale.CHINESE));
+        properties.put(VALID_SUB_TITLE,description(Locale.CHINESE));
+        properties.put(VALID_BOLD,"true");
+        properties.put(VALID_LINK_URL,"http://www.baidu.com");
+        properties.put(VALID_BG_IMG,"http://www.baidu.com");
         return properties;
     }
 

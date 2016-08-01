@@ -4,34 +4,24 @@ import com.huotu.hotcms.widget.ComponentProperties;
 import com.huotu.hotcms.widget.Widget;
 import com.huotu.hotcms.widget.WidgetStyle;
 import com.huotu.widget.test.WidgetTest;
-import com.huotu.widget.test.WidgetTestConfig;
-import com.huotu.widget.test.bean.WidgetViewController;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by lhx on 2016/6/23.
  */
-
 public class TestWidgetInfo extends WidgetTest {
 
     @Override
     protected boolean printPageSource() {
         return false;
     }
-
-    @Autowired
-    private WidgetViewController widgetViewController;
 
     @Override
     protected void editorWork(Widget widget, WebElement editor, Supplier<Map<String, Object>> currentWidgetProperties) {
@@ -64,36 +54,23 @@ public class TestWidgetInfo extends WidgetTest {
 
     @Override
     protected void browseWork(Widget widget, WidgetStyle style, Function<ComponentProperties, WebElement> uiChanger) {
-        uiChanger = (properties) -> {
-            widgetViewController.setCurrentProperties(properties);
-            String uri = "/browse/" + WidgetTestConfig.WidgetIdentity(widget) + "/" + style.id();
-            if (printPageSource())
-                try {
-                    mockMvc.perform(get(uri))
-                            .andDo(print());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new IllegalStateException("no print html");
-                }
-            driver.get("http://localhost" + uri);
-            WebElement webElement = driver.findElement(By.id("browse")).findElement(By.tagName("div"));
-            return webElement;
-        };
+
         ComponentProperties componentProperties = new ComponentProperties();
         ComponentProperties properties = new ComponentProperties();
-        properties.put("textBold","true");
-        properties.put("textContent","hello wordBanner");
-        properties.put("textFontSize",  "20px");
-        properties.put("textColor", "#111111");
-        properties.put("textBgColor", "#111111");
 
+        properties.put(WidgetInfo.VALID_TEXT_COLOR,"#000000");
+        properties.put(WidgetInfo.VALID_BG_COLOR,"#ffffff");
+        properties.put(WidgetInfo.VALID_FONT_SIZE,"16px");
+        properties.put(WidgetInfo.VALID_TITLE,"hello wordBanner");
+        properties.put(WidgetInfo.VALID_SUB_TITLE,"#hello wordBanner");
+        properties.put(WidgetInfo.VALID_BOLD,"true");
+        properties.put(WidgetInfo.VALID_LINK_URL,"http://www.baidu.com");
+        properties.put(WidgetInfo.VALID_BG_IMG,"http://www.baidu.com");
         componentProperties.put("properties", properties);
-
         WebElement webElement = uiChanger.apply(componentProperties);
-
-        List<WebElement> wordBanner = webElement.findElements(By.className("wordBanner"));
-        assertThat(wordBanner.size()).isEqualTo(1);
-        assertThat(wordBanner.get(0).getText()).isEqualToIgnoringCase("hello wordBanner");
+        List<WebElement> desc = webElement.findElements(By.className("desc"));
+        assertThat(desc.size()).isEqualTo(1);
+        assertThat(desc.get(0).getText()).isEqualToIgnoringCase("#hello wordBanner");
 
     }
 }

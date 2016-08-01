@@ -1,40 +1,44 @@
-<div class="wordBanner" style="display:block;" xmlns:th="http://www.thymeleaf.org">
-    <div>
-        <h3>
-            <i class="icon-puzzle"></i><b></b>设置组件参数
-        </h3>
-        <div class="wordBannerBox borderBoxs">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">文字内容</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control textContent"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">背景颜色</label>
-
-                    <div class="col-sm-3">
-                        <input type="color" class="form-control textBgColor"/>
-                    </div>
-                    <label class="col-sm-3 control-label">文字颜色</label>
-
-                    <div class="col-sm-3">
-                        <input type="color" class="form-control textColor"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">字号大小</label>
-
-                    <div class="col-sm-3">
-                        <input type="range" min="12" max="60" class="textFontSize"/><span class="spanFontSize"></span>
-                    </div>
-                    <div class="checkbox col-sm-3 col-sm-offset-3">
-                        <label><input type="checkbox" class="textBold">是否采用粗体</label>
-                    </div>
-                </div>
-            </form>
+<div class="borderBoxs">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">标题内容</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control textTitle" data-type="title">
+            </div>
         </div>
-    </div>
-    <!--/编辑视图-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">副标内容</label>
+            <div class="col-sm-9">
+                <textarea class="form-control textSubTitle" rows="3" data-type="subTitle"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">文字颜色</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control color-picker textColor" data-type="textColor">
+            </div>
+            <label class="col-sm-3 control-label">背景颜色</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control color-picker textBgColor" data-type="backgroundColor">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">字体大小</label>
+            <div class="col-sm-3 text-center">
+                <input type="range" name="fontSize" class="textFontSize" min="12" max="30" data-type="fontSize">
+                <span class="fontSizeView">21</span>
+            </div>
+            <label class="col-sm-3 control-label">是否粗体</label>
+            <div class="col-sm-3 checkbox">
+                <label><input type="checkbox" class="textBold">启用</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">跳转链接</label>
+            <div class="col-sm-9">
+                <input type="text"  class="form-control linkUrl" data-type="url">
+            </div>
+        </div>
+
+    </form>
 </div>
