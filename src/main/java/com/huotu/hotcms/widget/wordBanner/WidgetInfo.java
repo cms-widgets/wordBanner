@@ -47,20 +47,16 @@ public class WidgetInfo implements Widget{
 
     @Override
     public String name(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
+        if (locale.equals(Locale.CHINA)) {
             return "文字条幅";
         }
         return "text banner";
     }
 
-    @Override
-    public String description() {
-        return "这是一个文字条幅，你可以对组件进行自定义修改。";
-    }
 
     @Override
     public String description(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
+        if (locale.equals(Locale.CHINA)) {
             return "这是一个文字条幅，你可以对组件进行自定义修改。";
         }
         return "This is a text banner,  you can make custom change the component.";
