@@ -54,10 +54,7 @@ public class TestWidgetInfo extends WidgetTest {
 
     @Override
     protected void browseWork(Widget widget, WidgetStyle style, Function<ComponentProperties, WebElement> uiChanger) {
-
-        ComponentProperties componentProperties = new ComponentProperties();
         ComponentProperties properties = new ComponentProperties();
-
         properties.put(WidgetInfo.VALID_TEXT_COLOR,"#000000");
         properties.put(WidgetInfo.VALID_BG_COLOR,"#ffffff");
         properties.put(WidgetInfo.VALID_FONT_SIZE,"16px");
@@ -66,8 +63,7 @@ public class TestWidgetInfo extends WidgetTest {
         properties.put(WidgetInfo.VALID_BOLD,"true");
         properties.put(WidgetInfo.VALID_LINK_URL,"http://www.baidu.com");
         properties.put(WidgetInfo.VALID_BG_IMG,"http://www.baidu.com");
-        componentProperties.put("properties", properties);
-        WebElement webElement = uiChanger.apply(componentProperties);
+        WebElement webElement = uiChanger.apply(properties);
         List<WebElement> desc = webElement.findElements(By.className("desc"));
         assertThat(desc.size()).isEqualTo(1);
         assertThat(desc.get(0).getText()).isEqualToIgnoringCase("#hello wordBanner");
