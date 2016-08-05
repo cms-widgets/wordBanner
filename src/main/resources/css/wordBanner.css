@@ -1,4 +1,4 @@
-.[[${componentId}]].wordBanner{
+#[[${componentId}]].wordBanner{
     color:[[${properties['pagingTColor']}]];
     font-weight:[[${properties['textBold']}?'bold':'nomarl']];
     font-size:[[${properties['textFontSize']}]];
