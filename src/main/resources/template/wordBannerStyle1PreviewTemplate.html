@@ -1,6 +1,8 @@
+
 <!--预览视图-->
-<div id="wordBanner" id="word-banner" class="word-banner">
-    <h2 class="title" th:text="${properties['textTitle']}">伙伴商城，让企业快速进入移动电商、微信营销新时代</h2>
+<div id="wordBanner" class="word-banner wordBanner">
+    <h2 class="title">
+        <a th:href="${properties['linkUrl']}"  th:text="${properties['textTitle']}">伙伴商城，让企业快速进入移动电商、微信营销新时代</a> </h2>
     <p class="desc" th:text="${properties['textSubTitle']}">零成本扩张门店，爆炸式吸粉引流，低投入高效率搭建分销网络</p>
 </div>
 <!--/预览视图-->
