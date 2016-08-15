@@ -60,6 +60,7 @@ public class TestWidgetInfo extends WidgetTest {
         properties.put(WidgetInfo.VALID_SUB_TITLE, "#hello wordBanner");
         properties.put(WidgetInfo.VALID_BOLD, "true");
         properties.put(WidgetInfo.VALID_LINK_URL, "http://www.baidu.com");
+
         WebElement webElement = uiChanger.apply(properties);
         List<WebElement> desc = webElement.findElements(By.className("desc"));
         assertThat(desc.size()).isEqualTo(1);
