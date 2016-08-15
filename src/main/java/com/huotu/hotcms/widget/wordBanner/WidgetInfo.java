@@ -13,7 +13,6 @@ import com.huotu.hotcms.widget.ComponentProperties;
 import com.huotu.hotcms.widget.Widget;
 import com.huotu.hotcms.widget.WidgetStyle;
 import me.jiangcai.lib.resource.service.ResourceService;
-import org.apache.http.entity.ContentType;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -33,7 +32,6 @@ public class WidgetInfo implements Widget{
     public static final String VALID_SUB_TITLE = "textSubTitle";//文字副标题
     public static final String VALID_BOLD = "textBold";//是否粗体
     public static final String VALID_LINK_URL = "linkUrl";//是否粗体
-    public static final String VALID_BG_IMG = "bgImg";//是否粗体
 
     @Override
     public String groupId() {
@@ -94,29 +92,17 @@ public class WidgetInfo implements Widget{
 
     @Override
     public void valid(String styleId, ComponentProperties componentProperties) throws IllegalArgumentException {
-        WidgetStyle[] widgetStyles = styles();
-        boolean flag = false;
-        if (widgetStyles == null || widgetStyles.length < 1) {
-            throw new IllegalArgumentException();
-        }
-        for (WidgetStyle ws : widgetStyles) {
-            if ((flag = ws.id().equals(styleId))) {
-                break;
-            }
-        }
-        if (!flag) {
-            throw new IllegalArgumentException("样式不存在");
-        }
+        WidgetStyle style = WidgetStyle.styleByID(this,styleId);
         String textTitle = (String) componentProperties.get(VALID_TITLE);
-        String textSubTitle = (String) componentProperties.get(VALID_SUB_TITLE);
+        String textSubTitle =  componentProperties.get(VALID_SUB_TITLE).toString();
         String textColor = (String) componentProperties.get(VALID_TEXT_COLOR);
         String bgColor = (String) componentProperties.get(VALID_BG_COLOR);
         String fontSize = (String) componentProperties.get(VALID_FONT_SIZE);
-        String bold = (String) componentProperties.get(VALID_BOLD);
+        String bold =  componentProperties.get(VALID_BOLD).toString();
         String linkUrl = (String) componentProperties.get(VALID_LINK_URL);
-        String bgImg = (String) componentProperties.get(VALID_BG_IMG);
+
         if (textTitle == null || textSubTitle==null|| textColor == null || bgColor == null || fontSize == null || bold == null
-              ||linkUrl==null || bgImg==null  || textTitle.equals("") || textColor.equals("") || bgColor.equals("")
+              ||linkUrl==null  || textTitle.equals("") || textColor.equals("") || bgColor.equals("")
                 || fontSize.equals("")   ) {
             throw new IllegalArgumentException("控件属性缺少");
         }
@@ -132,12 +118,11 @@ public class WidgetInfo implements Widget{
         ComponentProperties properties = new ComponentProperties();
         properties.put(VALID_TEXT_COLOR,"#000000");
         properties.put(VALID_BG_COLOR,"#ffffff");
-        properties.put(VALID_FONT_SIZE,"16px");
+        properties.put(VALID_FONT_SIZE,"16");
         properties.put(VALID_TITLE,description(Locale.CHINESE));
         properties.put(VALID_SUB_TITLE,description(Locale.CHINESE));
         properties.put(VALID_BOLD,"true");
         properties.put(VALID_LINK_URL,"http://www.baidu.com");
-        properties.put(VALID_BG_IMG,"http://www.baidu.com");
         return properties;
     }
 

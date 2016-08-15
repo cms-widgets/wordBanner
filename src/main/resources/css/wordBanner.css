@@ -1,6 +1,6 @@
 /*[[${'#'+componentId}]]*/.wordBanner{
-    color:/*[[${properties['pagingTColor']}]]*/ transparent;
-    font-weight:/*[[${properties['textBold']}?'bold':'nomarl']]*/ normal;
-    font-size:/*[[${properties['textFontSize']}]]*/ 14px;
-    background:/*[[${properties['textBgColor']}]]*/ seashell;
+    color:/*[[${pagingTColor}]]*/ transparent;
+    font-weight:/*[[${textBold}?'bold':'nomarl']]*/ normal;
+    font-size:/*[[${textFontSize+'px'}]]*/ 14px;
+    background:/*[[${textBgColor}]]*/ seashell;
 }

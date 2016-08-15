@@ -3,40 +3,46 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">标题内容</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control textTitle" data-type="title">
+                <input type="text" name="textTitle" class="form-control textTitle" th:value="${textTitle}" value=""
+                       data-type="title">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">副标内容</label>
             <div class="col-sm-9">
-                <textarea class="form-control textSubTitle" rows="3" data-type="subTitle"></textarea>
+                <textarea name="textSubTitle" th:text="${textSubTitle}"  class="form-control textSubTitle"
+                          rows="3" data-type="subTitle"></textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">文字颜色</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control color-picker textColor" data-type="textColor">
+                <input type="text" name="textColor" th:value="${textColor}" value=""
+                       class="form-control color-picker textColor" data-type="textColor">
             </div>
             <label class="col-sm-3 control-label">背景颜色</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control color-picker textBgColor" data-type="backgroundColor">
+                <input type="text" name="textBgColor" th:value="${textBgColor}" value=""
+                       class="form-control color-picker textBgColor" data-type="backgroundColor">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">字体大小</label>
             <div class="col-sm-3 text-center">
-                <input type="range" name="fontSize" class="textFontSize" min="12" max="30" data-type="fontSize">
-                <span class="fontSizeView">21</span>
+                <input type="range" name="textFontSize" th:value="${textFontSize}" value="" class="textFontSize" min="12"
+                       max="40" data-type="textFontSize">
+                <span class="fontSizeView" th:text="${textFontSize}">21</span>
             </div>
             <label class="col-sm-3 control-label">是否粗体</label>
             <div class="col-sm-3 checkbox">
-                <label><input type="checkbox" class="textBold">启用</label>
+                <label><input name="textBold" th:checked="${textBold}" type="checkbox" class="textBold">启用</label>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">跳转链接</label>
             <div class="col-sm-9">
-                <input type="text"  class="form-control linkUrl" data-type="url">
+                <input type="text" name="linkUrl" th:value="${linkUrl}" value="" class="form-control linkUrl"
+                       data-type="url">
             </div>
         </div>
 
