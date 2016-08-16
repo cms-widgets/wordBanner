@@ -101,7 +101,7 @@ public class WidgetInfo implements Widget{
         String bold =  componentProperties.get(VALID_BOLD).toString();
         String linkUrl = (String) componentProperties.get(VALID_LINK_URL);
 
-        if (textTitle == null || textSubTitle==null|| textColor == null || bgColor == null || fontSize == null || bold == null
+       if (textTitle == null || textSubTitle==null|| textColor == null || bgColor == null || fontSize == null || bold == null
               ||linkUrl==null  || textTitle.equals("") || textColor.equals("") || bgColor.equals("")
                 || fontSize.equals("")   ) {
             throw new IllegalArgumentException("控件属性缺少");

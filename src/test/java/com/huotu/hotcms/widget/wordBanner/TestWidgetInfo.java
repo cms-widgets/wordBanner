@@ -6,6 +6,7 @@ import com.huotu.hotcms.widget.WidgetStyle;
 import com.huotu.widget.test.WidgetTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,19 +31,33 @@ public class TestWidgetInfo extends WidgetTest {
         //保存自定义属性
         try {
             Map<String, Object> ps = currentWidgetProperties.get();
-            ComponentProperties properties = new ComponentProperties();
-            if (ps != null) {
-                properties.putAll(ps);
-                widget.valid(null, properties);
-            }
             String bold = ps.get("textBold").toString();
-            assertThat(bold).as("默认没有选中粗体").isEqualTo("true");
+            assertThat(bold).as("默认没有选中粗体").isEqualTo("false");
             //设置粗体
             WebElement elementBold = editor.findElement(By.className("textBold"));
             elementBold.click();
             ps = currentWidgetProperties.get();
             bold = ps.get("textBold").toString();
-            assertThat(bold).as("单击选中粗体").isEqualTo("false");
+            assertThat(bold).as("单击选中粗体").isEqualTo("true");
+
+            WebElement textTitle = editor.findElement(By.name(WidgetInfo.VALID_TITLE));
+            WebElement textSubTitle = editor.findElement(By.name(WidgetInfo.VALID_SUB_TITLE));
+            WebElement textColor = editor.findElement(By.name(WidgetInfo.VALID_TEXT_COLOR));
+            WebElement textBgColor = editor.findElement(By.name(WidgetInfo.VALID_BG_COLOR));
+            WebElement linkUrl = editor.findElement(By.name(WidgetInfo.VALID_LINK_URL));
+            Actions actions = new Actions(driver);
+            actions.sendKeys(textTitle,"abc").build().perform();
+            actions.sendKeys(textSubTitle,"abc").build().perform();
+            actions.sendKeys(textColor,"abc").build().perform();
+            actions.sendKeys(textBgColor,"abc").build().perform();
+            actions.sendKeys(linkUrl,"abc").build().perform();
+            ps = currentWidgetProperties.get();
+            assertThat(ps.get(WidgetInfo.VALID_TITLE).toString()).isEqualTo("abc");
+            assertThat(ps.get(WidgetInfo.VALID_SUB_TITLE).toString()).isEqualTo("abc");
+            assertThat(ps.get(WidgetInfo.VALID_TEXT_COLOR).toString()).isEqualTo("abc");
+            assertThat(ps.get(WidgetInfo.VALID_BG_COLOR).toString()).isEqualTo("abc");
+            assertThat(ps.get(WidgetInfo.VALID_LINK_URL).toString()).isEqualTo("abc");
+
 
         } catch (IllegalStateException ignored) {
             assertThat(0).as("save没有属性值返回异常").isEqualTo(0);
