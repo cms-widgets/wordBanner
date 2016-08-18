@@ -25,9 +25,11 @@ import java.util.Map;
  * @author CJ
  */
 public class WidgetInfo implements Widget{
-    public static final String VALID_TEXT_COLOR = "textColor";//文本颜色
-    public static final String VALID_BG_COLOR = "textBgColor";//背景颜色
-    public static final String VALID_FONT_SIZE = "textFontSize";//字体大小
+    public static final String VALID_TITLE_TEXT_COLOR = "titleTextColor";//文本颜色
+    public static final String VALID_SUB_TITLE_TEXT_COLOR = "subTitleTextColor";//文本颜色
+    public static final String VALID_BG_COLOR = "bgColor";//背景颜色
+    public static final String VALID_TITLE_FONT_SIZE = "titleFontSize";//字体大小
+    public static final String VALID_SUB_TITLE_FONT_SIZE = "subTitleFontSize";//字体大小
     public static final String VALID_TITLE = "textTitle";//文字标题
     public static final String VALID_SUB_TITLE = "textSubTitle";//文字副标题
     public static final String VALID_BOLD = "textBold";//是否粗体
@@ -95,15 +97,17 @@ public class WidgetInfo implements Widget{
         WidgetStyle style = WidgetStyle.styleByID(this,styleId);
         String textTitle = (String) componentProperties.get(VALID_TITLE);
         String textSubTitle =  componentProperties.get(VALID_SUB_TITLE).toString();
-        String textColor = (String) componentProperties.get(VALID_TEXT_COLOR);
+        String textColor = (String) componentProperties.get(VALID_TITLE_TEXT_COLOR);
+        String subTextColor = (String) componentProperties.get(VALID_SUB_TITLE_TEXT_COLOR);
         String bgColor = (String) componentProperties.get(VALID_BG_COLOR);
-        String fontSize = (String) componentProperties.get(VALID_FONT_SIZE);
+        String titleFontSize = (String) componentProperties.get(VALID_TITLE_FONT_SIZE);
+        String subTitlefontSize = (String) componentProperties.get(VALID_SUB_TITLE_FONT_SIZE);
         String bold =  componentProperties.get(VALID_BOLD).toString();
         String linkUrl = (String) componentProperties.get(VALID_LINK_URL);
 
-       if (textTitle == null || textSubTitle==null|| textColor == null || bgColor == null || fontSize == null || bold == null
-              ||linkUrl==null  || textTitle.equals("") || textColor.equals("") || bgColor.equals("")
-                || fontSize.equals("")   ) {
+       if (textTitle == null || subTitlefontSize==null || textSubTitle==null|| textColor == null || subTextColor==null ||
+               bgColor == null || titleFontSize == null || bold == null ||linkUrl==null  || subTextColor.equals("")
+                || textTitle.equals("") || textColor.equals("") || bgColor.equals("") || titleFontSize.equals("") ||subTitlefontSize.equals("")   ) {
             throw new IllegalArgumentException("控件属性缺少");
         }
     }
@@ -116,9 +120,11 @@ public class WidgetInfo implements Widget{
     @Override
     public ComponentProperties defaultProperties(ResourceService resourceService) {
         ComponentProperties properties = new ComponentProperties();
-        properties.put(VALID_TEXT_COLOR,"#000000");
+        properties.put(VALID_TITLE_TEXT_COLOR,"#000000");
+        properties.put(VALID_SUB_TITLE_TEXT_COLOR,"#000000");
         properties.put(VALID_BG_COLOR,"#ffffff");
-        properties.put(VALID_FONT_SIZE,"16");
+        properties.put(VALID_TITLE_FONT_SIZE,"16");
+        properties.put(VALID_SUB_TITLE_FONT_SIZE,"16");
         properties.put(VALID_TITLE,description(Locale.CHINESE));
         properties.put(VALID_SUB_TITLE,description(Locale.CHINESE));
         properties.put(VALID_BOLD,"true");

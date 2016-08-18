@@ -1,6 +1,17 @@
-/*[[${'#'+componentId}]]*/.wordBanner{
-    color:/*[[${pagingTColor}]]*/ transparent;
+/*[[${'#'+componentId+'.wordBanner' }]]*/
+{
+    background:/*[[${bgColor}]]*/ seashell;
+}
+
+/*[[${'#'+componentId+'.wordBanner p' }]]*/
+{
+    color:/*[[${subTitleTextColor}]]*/ transparent;
     font-weight:/*[[${textBold}?'bold':'nomarl']]*/ normal;
-    font-size:/*[[${textFontSize+'px'}]]*/ 14px;
-    background:/*[[${textBgColor}]]*/ seashell;
+    font-size:/*[[${subTitleFontSize+'px'}]]*/ 14px;
+}
+
+/*[[${'#'+componentId+'.wordBanner a' }]]*/
+{
+    color:/*[[${titleTextColor}]]*/ transparent;
+    font-size:/*[[${titleFontSize+'px'}]]*/ 14px;
 }

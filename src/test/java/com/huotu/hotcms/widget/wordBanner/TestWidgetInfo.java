@@ -32,19 +32,24 @@ public class TestWidgetInfo extends WidgetTest {
         try {
             Map<String, Object> ps = currentWidgetProperties.get();
             String bold = ps.get("textBold").toString();
-            assertThat(bold).as("默认没有选中粗体").isEqualTo("false");
+            assertThat(bold).as("默认选中粗体").isEqualTo("true");
             //设置粗体
             WebElement elementBold = editor.findElement(By.className("textBold"));
             elementBold.click();
             ps = currentWidgetProperties.get();
             bold = ps.get("textBold").toString();
-            assertThat(bold).as("单击选中粗体").isEqualTo("true");
+            assertThat(bold).as("单击取消选中粗体").isEqualTo("false");
 
             WebElement textTitle = editor.findElement(By.name(WidgetInfo.VALID_TITLE));
             WebElement textSubTitle = editor.findElement(By.name(WidgetInfo.VALID_SUB_TITLE));
-            WebElement textColor = editor.findElement(By.name(WidgetInfo.VALID_TEXT_COLOR));
+            WebElement textColor = editor.findElement(By.name(WidgetInfo.VALID_TITLE_TEXT_COLOR));
             WebElement textBgColor = editor.findElement(By.name(WidgetInfo.VALID_BG_COLOR));
             WebElement linkUrl = editor.findElement(By.name(WidgetInfo.VALID_LINK_URL));
+            textTitle.clear();
+            textSubTitle.clear();
+            textColor.clear();
+            textBgColor.clear();
+            linkUrl.clear();
             Actions actions = new Actions(driver);
             actions.sendKeys(textTitle,"abc").build().perform();
             actions.sendKeys(textSubTitle,"abc").build().perform();
@@ -54,11 +59,9 @@ public class TestWidgetInfo extends WidgetTest {
             ps = currentWidgetProperties.get();
             assertThat(ps.get(WidgetInfo.VALID_TITLE).toString()).isEqualTo("abc");
             assertThat(ps.get(WidgetInfo.VALID_SUB_TITLE).toString()).isEqualTo("abc");
-            assertThat(ps.get(WidgetInfo.VALID_TEXT_COLOR).toString()).isEqualTo("abc");
+            assertThat(ps.get(WidgetInfo.VALID_TITLE_TEXT_COLOR).toString()).isEqualTo("abc");
             assertThat(ps.get(WidgetInfo.VALID_BG_COLOR).toString()).isEqualTo("abc");
             assertThat(ps.get(WidgetInfo.VALID_LINK_URL).toString()).isEqualTo("abc");
-
-
         } catch (IllegalStateException ignored) {
             assertThat(0).as("save没有属性值返回异常").isEqualTo(0);
         }
@@ -68,9 +71,9 @@ public class TestWidgetInfo extends WidgetTest {
     @Override
     protected void browseWork(Widget widget, WidgetStyle style, Function<ComponentProperties, WebElement> uiChanger) {
         ComponentProperties properties = new ComponentProperties();
-        properties.put(WidgetInfo.VALID_TEXT_COLOR, "#000000");
+        properties.put(WidgetInfo.VALID_TITLE_TEXT_COLOR, "#000000");
         properties.put(WidgetInfo.VALID_BG_COLOR, "#ffffff");
-        properties.put(WidgetInfo.VALID_FONT_SIZE, "16");
+        properties.put(WidgetInfo.VALID_TITLE_FONT_SIZE, "16");
         properties.put(WidgetInfo.VALID_TITLE, "hello wordBanner");
         properties.put(WidgetInfo.VALID_SUB_TITLE, "#hello wordBanner");
         properties.put(WidgetInfo.VALID_BOLD, "true");
@@ -89,11 +92,11 @@ public class TestWidgetInfo extends WidgetTest {
         ComponentProperties properties = widget.defaultProperties(resourceService);
         WebElement webElement = uiChanger.apply(widget.defaultProperties(resourceService));
 
-        assertThat(webElement.findElement(By.name(WidgetInfo.VALID_TEXT_COLOR)).getAttribute("value"))
-                .isEqualTo(properties.get(WidgetInfo.VALID_TEXT_COLOR));
+        assertThat(webElement.findElement(By.name(WidgetInfo.VALID_TITLE_TEXT_COLOR)).getAttribute("value"))
+                .isEqualTo(properties.get(WidgetInfo.VALID_TITLE_TEXT_COLOR));
 
-        assertThat(webElement.findElement(By.name(WidgetInfo.VALID_FONT_SIZE)).getAttribute("value"))
-                .isEqualTo(properties.get(WidgetInfo.VALID_FONT_SIZE));
+        assertThat(webElement.findElement(By.name(WidgetInfo.VALID_TITLE_FONT_SIZE)).getAttribute("value"))
+                .isEqualTo(properties.get(WidgetInfo.VALID_TITLE_FONT_SIZE));
 
         assertThat(webElement.findElement(By.name(WidgetInfo.VALID_LINK_URL)).getAttribute("value"))
                 .isEqualTo(properties.get(WidgetInfo.VALID_LINK_URL));
