@@ -1,20 +1,20 @@
 <div class="borderBoxs">
     <form class="form-horizontal">
-        <div class="form-group">
+        <div class="form-group clearfix">
             <label class="col-sm-3 control-label">标题内容</label>
             <div class="col-sm-9">
                 <input type="text" name="textTitle" class="form-control textTitle" th:value="${textTitle}" value=""
                        data-type="title">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
             <label class="col-sm-3 control-label">副标内容</label>
             <div class="col-sm-9">
                 <textarea name="textSubTitle" th:text="${textSubTitle}" text=""  class="form-control textSubTitle"
                           rows="3" data-type="subTitle"></textarea>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
             <label class="col-sm-2 control-label">标题颜色</label>
             <div class="col-sm-2">
                 <input type="text" name="titleTextColor" th:value="${titleTextColor}" value=""
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group clearfix">
             <label class="col-sm-2 control-label">标题大小</label>
             <div class="col-sm-2 text-center">
                 <input type="range" name="titleFontSize" th:value="${titleFontSize}" value=""
@@ -50,7 +50,7 @@
                 <label><input name="textBold" th:checked="${textBold}" type="checkbox" class="textBold">启用</label>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
             <label class="col-sm-3 control-label">跳转链接</label>
             <div class="col-sm-9">
                 <input type="text" name="linkUrl" th:value="${linkUrl}" value="" class="form-control linkUrl"
