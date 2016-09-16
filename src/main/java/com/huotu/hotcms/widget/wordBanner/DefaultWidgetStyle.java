@@ -20,15 +20,15 @@ public class DefaultWidgetStyle implements WidgetStyle {
 
     @Override
     public String name() {
-        return "bootstrap 风格文字条幅风格";
+        return "默认";
     }
 
     @Override
     public String name(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
-            return "bootstrap 风格文字条幅";
+        if (locale.equals(Locale.CHINA)) {
+            return name();
         }
-        return "bootstrap style text banner";
+        return "default style";
     }
 
     @Override
@@ -38,7 +38,7 @@ public class DefaultWidgetStyle implements WidgetStyle {
 
     @Override
     public String description(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
+        if (locale.equals(Locale.CHINA)) {
             return "基于bootstrap样式的文字条幅";
         }
         return "Based on the bootstrap style by Friendship text banner";
