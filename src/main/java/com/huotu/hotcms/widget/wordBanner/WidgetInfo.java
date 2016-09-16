@@ -125,8 +125,8 @@ public class WidgetInfo implements Widget{
         properties.put(VALID_BG_COLOR,"#ffffff");
         properties.put(VALID_TITLE_FONT_SIZE,"16");
         properties.put(VALID_SUB_TITLE_FONT_SIZE,"16");
-        properties.put(VALID_TITLE,description(Locale.CHINESE));
-        properties.put(VALID_SUB_TITLE,description(Locale.CHINESE));
+        properties.put(VALID_TITLE, description(Locale.CHINA));
+        properties.put(VALID_SUB_TITLE, description(Locale.CHINA));
         properties.put(VALID_BOLD,"true");
         properties.put(VALID_LINK_URL,"http://www.baidu.com");
         return properties;
