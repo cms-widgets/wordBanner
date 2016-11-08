@@ -64,7 +64,7 @@ public class WidgetInfo implements Widget{
 
     @Override
     public String dependVersion() {
-        return "1.0-SNAPSHOT";
+        return "1.0";
     }
 
     @Override

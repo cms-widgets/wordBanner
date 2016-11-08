@@ -3,6 +3,7 @@ package com.huotu.hotcms.widget.wordBanner;
 import com.huotu.hotcms.widget.ComponentProperties;
 import com.huotu.hotcms.widget.Widget;
 import com.huotu.hotcms.widget.WidgetStyle;
+import com.huotu.widget.test.Editor;
 import com.huotu.widget.test.WidgetTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,24 +28,24 @@ public class TestWidgetInfo extends WidgetTest {
     }
 
     @Override
-    protected void editorWork(Widget widget, WebElement editor, Supplier<Map<String, Object>> currentWidgetProperties) {
+    protected void editorWork(Widget widget, Editor editor, Supplier<Map<String, Object>> currentWidgetProperties) {
         //保存自定义属性
         try {
             Map<String, Object> ps = currentWidgetProperties.get();
             String bold = ps.get("textBold").toString();
             assertThat(bold).as("默认选中粗体").isEqualTo("true");
             //设置粗体
-            WebElement elementBold = editor.findElement(By.className("textBold"));
+            WebElement elementBold = editor.getWebElement().findElement(By.className("textBold"));
             elementBold.click();
             ps = currentWidgetProperties.get();
             bold = ps.get("textBold").toString();
             assertThat(bold).as("单击取消选中粗体").isEqualTo("false");
 
-            WebElement textTitle = editor.findElement(By.name(WidgetInfo.VALID_TITLE));
-            WebElement textSubTitle = editor.findElement(By.name(WidgetInfo.VALID_SUB_TITLE));
-            WebElement textColor = editor.findElement(By.name(WidgetInfo.VALID_TITLE_TEXT_COLOR));
-            WebElement textBgColor = editor.findElement(By.name(WidgetInfo.VALID_BG_COLOR));
-            WebElement linkUrl = editor.findElement(By.name(WidgetInfo.VALID_LINK_URL));
+            WebElement textTitle = editor.getWebElement().findElement(By.name(WidgetInfo.VALID_TITLE));
+            WebElement textSubTitle = editor.getWebElement().findElement(By.name(WidgetInfo.VALID_SUB_TITLE));
+            WebElement textColor = editor.getWebElement().findElement(By.name(WidgetInfo.VALID_TITLE_TEXT_COLOR));
+            WebElement textBgColor = editor.getWebElement().findElement(By.name(WidgetInfo.VALID_BG_COLOR));
+            WebElement linkUrl = editor.getWebElement().findElement(By.name(WidgetInfo.VALID_LINK_URL));
             textTitle.clear();
             textSubTitle.clear();
             textColor.clear();
